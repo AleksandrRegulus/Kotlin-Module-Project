@@ -2,19 +2,14 @@
 
 class MenuCreateArchive : Menu() {
 
-    override fun createMenu(currentChoice: CurrentChoice): MutableMap<Int, MenuItem> {
-        val menuList: MutableMap<Int, MenuItem> = mutableMapOf()
-        val userInput = UserInput()
+    override fun createMenu(currentChoice: CurrentChoice): MutableMap<Int, MenuItem> =
 
-        menuList[-1] = MenuItem("\nСОЗДАНИЕ АРХИВА\n") {}
-        menuList[0] = MenuItem("Ввести имя и создать архив") {
-            println("Введите имя архива")
-            currentChoice.listArchives.add( Archive(userInput.getUserAnswerStringName()) )
-            currentChoice.currentListMenu = ListMenu.ARCHIVES
-        }
+        getMenuForCreateElement(
+            MenuItem("\nСОЗДАНИЕ АРХИВА\n") {},
+            "архив",
+            { name -> currentChoice.listArchives.add( Archive(name) ) },
+            currentChoice,
+            ListMenu.ARCHIVES
+        )
 
-        menuList[1] = MenuItem("Отмена. Вернуться в прерыдущее меню") { currentChoice.currentListMenu = ListMenu.ARCHIVES }
-
-        return menuList
-    }
 }

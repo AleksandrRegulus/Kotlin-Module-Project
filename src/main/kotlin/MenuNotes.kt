@@ -13,8 +13,8 @@ class MenuNotes : Menu() {
         currentArchive.notes.forEach { note ->
             menuList[++i] = MenuItem("Заметка '${note.noteName}'") {
                 currentChoice.currentListMenu = ListMenu.CURRENT_NOTE
+                currentChoice.currentNote = currentArchive.notes.indexOf(note)
             }
-            currentChoice.currentNote = currentArchive.notes.indexOf(note)
         }
 
         menuList[++i] = MenuItem("Выход в предыдущее меню") { currentChoice.currentListMenu = ListMenu.ARCHIVES }

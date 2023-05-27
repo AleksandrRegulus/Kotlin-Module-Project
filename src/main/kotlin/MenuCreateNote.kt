@@ -2,19 +2,14 @@
 
 class MenuCreateNote: Menu() {
 
-    override fun createMenu(currentChoice: CurrentChoice): MutableMap<Int, MenuItem> {
-        val menuList: MutableMap<Int, MenuItem> = mutableMapOf()
-        val userInput = UserInput()
+    override fun createMenu(currentChoice: CurrentChoice): MutableMap<Int, MenuItem> =
 
-        menuList[-1] = MenuItem("\nСОЗДАНИЕ ЗАМЕТКИ\n") {}
-        menuList[0] = MenuItem("Ввести имя и создать заметку") {
-            println("Введите имя заметки")
-            currentChoice.listArchives[currentChoice.currentArchive].notes.add( Note(userInput.getUserAnswerStringName()) )
-            currentChoice.currentListMenu = ListMenu.NOTES
-        }
-
-        menuList[1] = MenuItem("Отмена. Вернуться в прерыдущее меню") { currentChoice.currentListMenu = ListMenu.NOTES }
-
-        return menuList
-    }
+        getMenuForCreateElement(
+            MenuItem("\nСОЗДАНИЕ ЗАМЕТКИ\n") {},
+            "заметку",
+            { name -> currentChoice.listArchives[currentChoice.currentArchive].notes.add( Note(name) ) },
+            currentChoice,
+            ListMenu.NOTES
+        )
 }
+
